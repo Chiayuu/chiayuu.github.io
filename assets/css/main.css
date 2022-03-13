@@ -2094,7 +2094,7 @@ input, select, textarea {
 			}
 
 			.image.thumb:hover:before {
-				background: url("images/selfie.jpg"), url("images/overlay.jpg");
+				background: url("images/selfie.jpg"), url("images/selfie.jpg");
 				opacity: 1.0;
 			}
 
