@@ -1,6 +1,6 @@
 ## Personal Website
 -Contents
 
-■ About Me
-■ Notes
+■ About Me     
+■ Notes     
 ■ HomeWorks
