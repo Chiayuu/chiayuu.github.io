@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Buddy Health Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Buddy Health Tracker</p>
+      <h1>體重・飲食・運動紀錄</h1>
+    </div>
+    <button id="themeBtn" class="ghost">🌙</button>
+  </header>
+
+  <main class="layout">
+    <section class="card hero">
+      <h2>今天狀態</h2>
+      <div class="stats">
+        <div><span id="todayWeight">--</span><small>最新體重 kg</small></div>
+        <div><span id="todayNet">--</span><small>今日熱量得失 kcal</small></div>
+        <div><span id="todayBudget">--</span><small>估計維持熱量 kcal</small></div>
+      </div>
+      <canvas id="weightChart" height="130"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>基本資料</h2>
+      <div class="grid two">
+        <label>身高 cm<input id="height" type="number" placeholder="例如 158"></label>
+        <label>年齡<input id="age" type="number" placeholder="例如 27"></label>
+        <label>性別
+          <select id="sex"><option value="female">女性</option><option value="male">男性</option></select>
+        </label>
+        <label>活動量
+          <select id="activity">
+            <option value="1.2">久坐</option>
+            <option value="1.375">輕度活動</option>
+            <option value="1.55">中度活動</option>
+            <option value="1.725">高度活動</option>
+          </select>
+        </label>
+        <label>目標體重 kg<input id="goalWeight" type="number" step="0.1" placeholder="45"></label>
+        <label>OpenAI API Key（只存在本機）<input id="apiKey" type="password" placeholder="sk-... 不要放到 GitHub"></label>
+      </div>
+      <button id="saveProfile">儲存基本資料</button>
+      <p class="note">GitHub Pages 是純前端，API key 不能公開寫在程式碼裡。這個欄位只存在妳自己的瀏覽器 localStorage。</p>
+    </section>
+
+    <section class="card">
+      <h2>新增紀錄</h2>
+      <div class="tabs">
+        <button class="tab active" data-tab="weight">體重</button>
+        <button class="tab" data-tab="food">飲食</button>
+        <button class="tab" data-tab="exercise">運動</button>
+      </div>
+
+      <form id="weightForm" class="panel active">
+        <label>日期<input id="weightDate" type="date" required></label>
+        <label>體重 kg<input id="weightValue" type="number" step="0.1" required></label>
+        <label>備註<input id="weightNote" placeholder="生理期、水腫、睡不好..."></label>
+        <button>新增體重</button>
+      </form>
+
+      <form id="foodForm" class="panel">
+        <label>日期<input id="foodDate" type="date" required></label>
+        <label>吃了什麼<textarea id="foodText" placeholder="例如：latte 一杯、雞胸便當、草莓一碗" required></textarea></label>
+        <label>手動熱量 kcal（可空白，讓 Buddy 估）<input id="foodCalories" type="number"></label>
+        <button>新增飲食</button>
+      </form>
+
+      <form id="exerciseForm" class="panel">
+        <label>日期<input id="exerciseDate" type="date" required></label>
+        <label>運動內容<textarea id="exerciseText" placeholder="例如：快走 40 分鐘、重訓腿 50 分鐘" required></textarea></label>
+        <label>手動消耗 kcal（可空白，讓 Buddy 估）<input id="exerciseCalories" type="number"></label>
+        <button>新增運動</button>
+      </form>
+    </section>
+
+    <section class="card wide">
+      <h2>Buddy 熱量分析</h2>
+      <p class="note">會把妳的基本資料、最近體重、今天飲食和運動送去 OpenAI API，請用自己的 key。</p>
+      <div class="buttonRow">
+        <button id="analyzeBtn">分析今天</button>
+        <button id="exportBtn" class="secondary">匯出 JSON</button>
+        <button id="importBtn" class="secondary">匯入 JSON</button>
+        <button id="clearBtn" class="danger">清空資料</button>
+      </div>
+      <textarea id="importBox" class="hidden" placeholder="把備份 JSON 貼在這裡，再按一次匯入"></textarea>
+      <article id="aiResult" class="result">還沒有分析。</article>
+    </section>
+
+    <section class="card wide">
+      <h2>紀錄表</h2>
+      <div id="records"></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
