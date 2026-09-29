@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FitNest Prototype</title>
+<style>
+:root{
+  --bg:#f6f7f2;--panel:#fff;--ink:#1f2a24;--muted:#758179;--green:#6f9a7f;--green2:#dbe9df;
+  --coral:#ef8f77;--gold:#f3bc57;--line:#e8ebe6;--shadow:0 14px 40px rgba(50,65,57,.10);
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#fafaf7,#f0f4ee);color:var(--ink)}
+button{font:inherit}.app{display:grid;grid-template-columns:92px 1fr;min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:#1f2f27;padding:22px 16px;display:flex;flex-direction:column;align-items:center;gap:16px}.logo{width:52px;height:52px;border-radius:18px;background:#fff;color:#315a45;display:grid;place-items:center;font-size:26px;font-weight:800;margin-bottom:14px}.navbtn{width:58px;height:58px;border:0;border-radius:18px;background:transparent;color:#c9d5cd;font-size:24px;cursor:pointer;transition:.2s}.navbtn:hover,.navbtn.active{background:#fff;color:#315a45;transform:translateY(-1px)}.spacer{flex:1}.main{padding:26px 32px 40px;max-width:1440px;width:100%;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.hello h1{margin:0;font-size:30px}.hello p{margin:5px 0 0;color:var(--muted)}.wallet{display:flex;gap:12px}.pill{background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px 16px;box-shadow:0 6px 18px rgba(0,0,0,.04);font-weight:700}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}.hero{background:linear-gradient(135deg,#eff6ef,#fff7ef);border:1px solid var(--line);border-radius:28px;padding:26px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.25fr .75fr;gap:24px;overflow:hidden}.eyebrow{font-size:12px;letter-spacing:.17em;color:#65806f;font-weight:800}.hero h2{font-size:42px;line-height:1.05;margin:10px 0 14px;max-width:620px}.hero p{color:var(--muted);font-size:16px;line-height:1.6;max-width:600px}.cta{display:flex;gap:10px;margin-top:22px}.btn{border:0;border-radius:14px;padding:12px 17px;font-weight:800;cursor:pointer}.btn.primary{background:#315b46;color:#fff}.btn.soft{background:#fff;color:#315b46;border:1px solid #dce7df}.pet-stage{align-self:end;min-height:250px;border-radius:24px;background:radial-gradient(circle at 50% 35%,#fff,#e6efe6 60%,#d9e7dc);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}.pet{font-size:108px;filter:drop-shadow(0 12px 9px rgba(0,0,0,.12));animation:bob 3s ease-in-out infinite}.pet-name{background:#fff;padding:8px 13px;border-radius:999px;font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.08)}@keyframes bob{50%{transform:translateY(-8px)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow)}.card h3{margin:0 0 6px;font-size:20px}.sub{color:var(--muted);font-size:14px}.activity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.stat{background:#f7f8f5;border-radius:18px;padding:16px}.stat .icon{font-size:24px}.value{font-size:25px;font-weight:900;margin-top:8px}.label{font-size:12px;color:var(--muted);margin-top:3px}.ringrow{display:flex;gap:18px;align-items:center;margin-top:19px}.rings{width:130px;height:130px;border-radius:50%;background:conic-gradient(var(--coral) 0 82%,#f0d7d0 82%);display:grid;place-items:center}.rings:before{content:"";width:92px;height:92px;border-radius:50%;background:conic-gradient(#69a985 0 68%,#dbe9df 68%);display:grid;place-items:center}.rings:after{content:"";position:absolute}.ringtext{display:grid;gap:10px}.mini{display:flex;gap:8px;align-items:center;font-size:13px}.dot{width:10px;height:10px;border-radius:50%}.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}.bar{margin-top:13px}.barline{display:flex;justify-content:space-between;font-size:13px}.track{height:10px;border-radius:999px;background:#edf0ec;margin-top:6px;overflow:hidden}.fill{height:100%;border-radius:999px}.pet-actions{display:flex;gap:9px;margin-top:18px}.apartment{position:relative;min-height:285px;background:linear-gradient(180deg,#f4efe5 0 62%,#d8c6ac 62%);overflow:hidden}.room{height:210px;display:grid;place-items:center;font-size:88px}.room-details{display:flex;justify-content:space-between;align-items:end}.room-meta{display:flex;gap:10px}.badge{padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.8);font-size:13px;font-weight:800}.quest{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.quest:last-child{border-bottom:0}.check{width:34px;height:34px;border-radius:12px;background:var(--green2);display:grid;place-items:center}.qbody{flex:1}.qtitle{font-weight:800}.qsub{color:var(--muted);font-size:12px;margin-top:2px}.reward{font-weight:900;color:#ad7a1c}.screen{display:none}.screen.active{display:block}.screen-title{margin-bottom:18px}.screen-title h2{margin:0;font-size:32px}.screen-title p{color:var(--muted)}.workout-list{display:grid;gap:14px}.workout{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px}.workout .wic{width:50px;height:50px;border-radius:16px;background:#edf5ef;display:grid;place-items:center;font-size:25px}.workout strong{display:block}.workout span{color:var(--muted);font-size:13px}.xp{font-weight:900;color:#315b46}.toast{position:fixed;right:24px;bottom:24px;background:#1f2f27;color:#fff;padding:14px 18px;border-radius:14px;opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:980px){.app{grid-template-columns:1fr}.sidebar{position:fixed;bottom:0;top:auto;height:auto;width:100%;z-index:5;flex-direction:row;justify-content:center}.logo,.spacer{display:none}.main{padding:20px 18px 105px}.grid,.bottom-grid,.hero{grid-template-columns:1fr}.hero h2{font-size:34px}.wallet{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo">FN</div>
+    <button class="navbtn active" data-screen="home" title="Home">⌂</button>
+    <button class="navbtn" data-screen="workouts" title="Workouts">🏃</button>
+    <button class="navbtn" data-screen="pet" title="Pet">🐶</button>
+    <button class="navbtn" data-screen="apartment" title="Apartment">🏠</button>
+    <div class="spacer"></div>
+    <button class="navbtn" title="Settings">⚙️</button>
+  </aside>
+
+  <main class="main">
+    <section id="home" class="screen active">
+      <div class="topbar">
+        <div class="hello"><h1>Good morning, Gina 👋</h1><p>Your real-world movement is powering your little world.</p></div>
+        <div class="wallet"><div class="pill">🪙 <span id="coins">1,240</span></div><div class="pill">🔥 7 day streak</div></div>
+      </div>
+
+      <div class="grid">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">APPLE HEALTH • APPLE WATCH</div>
+            <h2>Move outside.<br>Grow your world inside.</h2>
+            <p>Workouts, steps and activity become energy for your pet and coins for your apartment. The more consistent you are, the more your home grows.</p>
+            <div class="cta"><button class="btn primary" onclick="simulateSync()">Sync today's workout</button><button class="btn soft" onclick="switchScreen('workouts')">View activity</button></div>
+          </div>
+          <div class="pet-stage"><div class="pet">🐶</div><div class="pet-name">Google • Lv. 5</div></div>
+        </div>
+
+        <div class="card">
+          <h3>Today's Activity</h3><div class="sub">Synced from Apple Health</div>
+          <div class="activity-grid">
+            <div class="stat"><div class="icon">👟</div><div class="value" id="steps">8,420</div><div class="label">steps</div></div>
+            <div class="stat"><div class="icon">⏱️</div><div class="value">32</div><div class="label">active min</div></div>
+            <div class="stat"><div class="icon">🔥</div><div class="value">420</div><div class="label">kcal</div></div>
+          </div>
+          <div class="ringrow"><div class="rings"></div><div class="ringtext"><div class="mini"><span class="dot" style="background:#ef8f77"></span>Move 420 / 500 kcal</div><div class="mini"><span class="dot" style="background:#69a985"></span>Exercise 32 / 30 min</div><div class="mini"><span class="dot" style="background:#65a8e3"></span>Stand 10 / 12 hr</div></div></div>
+        </div>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="card">
+          <h3>Your Pet</h3><div class="sub">Mood: Cheerful 💚</div>
+          <div class="bar"><div class="barline"><span>Hunger</span><strong id="hungerText">70%</strong></div><div class="track"><div class="fill" id="hunger" style="width:70%;background:#ef8f77"></div></div></div>
+          <div class="bar"><div class="barline"><span>Happiness</span><strong id="happyText">90%</strong></div><div class="track"><div class="fill" id="happy" style="width:90%;background:#69a985"></div></div></div>
+          <div class="bar"><div class="barline"><span>Energy</span><strong>80%</strong></div><div class="track"><div class="fill" style="width:80%;background:#f3bc57"></div></div></div>
+          <div class="pet-actions"><button class="btn primary" onclick="feedPet()">Feed</button><button class="btn soft" onclick="playPet()">Play</button></div>
+        </div>
+
+        <div class="card apartment">
+          <h3>Your Apartment</h3><div class="sub">Lv. 5 • Cozy Studio</div>
+          <div class="room">🛋️🪴</div>
+          <div class="room-details"><div class="room-meta"><div class="badge">🏡 Comfort 320</div><div class="badge">🪙 120/day</div></div><button class="btn primary" onclick="upgradeApartment()">Upgrade</button></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:22px">
+        <h3>Daily Missions</h3>
+        <div class="quest"><div class="check">✓</div><div class="qbody"><div class="qtitle">Complete 30 active minutes</div><div class="qsub">32 / 30 min</div></div><div class="reward">+80 🪙</div></div>
+        <div class="quest"><div class="check">✓</div><div class="qbody"><div class="qtitle">Walk at least 8,000 steps</div><div class="qsub">8,420 / 8,000</div></div><div class="reward">+50 🪙</div></div>
+        <div class="quest"><div class="check">○</div><div class="qbody"><div class="qtitle">Play with Google</div><div class="qsub">Use energy earned from exercise</div></div><div class="reward">+25 🪙</div></div>
+      </div>
+    </section>
+
+    <section id="workouts" class="screen">
+      <div class="screen-title"><h2>Workout History</h2><p>Apple Health / Watch synced activity</p></div>
+      <div class="workout-list">
+        <div class="workout"><div class="wic">🏃</div><div><strong>Outdoor Run</strong><span>Today • 3.8 mi • 34 min • 318 kcal</span></div><div class="xp">+140 XP</div></div>
+        <div class="workout"><div class="wic">🚶</div><div><strong>Outdoor Walk</strong><span>Yesterday • 2.1 mi • 41 min • 176 kcal</span></div><div class="xp">+85 XP</div></div>
+        <div class="workout"><div class="wic">🏋️</div><div><strong>Strength Training</strong><span>Sep 27 • 46 min • 265 kcal</span></div><div class="xp">+120 XP</div></div>
+        <div class="workout"><div class="wic">🚴</div><div><strong>Indoor Cycling</strong><span>Sep 26 • 38 min • 302 kcal</span></div><div class="xp">+110 XP</div></div>
+      </div>
+    </section>
+
+    <section id="pet" class="screen">
+      <div class="screen-title"><h2>Google's Room 🐶</h2><p>Take care of your pet with the energy you earn from moving.</p></div>
+      <div class="hero"><div><div class="eyebrow">LEVEL 5 COMPANION</div><h2>Google is feeling cheerful today.</h2><p>Your 32 active minutes gave Google extra play energy. Keep your streak going to unlock toys, outfits and room themes.</p><div class="cta"><button class="btn primary" onclick="feedPet()">Give snack</button><button class="btn soft" onclick="playPet()">Play together</button></div></div><div class="pet-stage"><div class="pet">🐶</div><div class="pet-name">Happiness 90%</div></div></div>
+    </section>
+
+    <section id="apartment" class="screen">
+      <div class="screen-title"><h2>My Apartment 🏠</h2><p>Decorate, expand and earn passive coins.</p></div>
+      <div class="card apartment" style="min-height:520px"><div class="room" style="height:390px;font-size:120px">🛏️ 🪴 🛋️</div><div class="room-details"><div class="room-meta"><div class="badge">Lv. 5 Cozy Studio</div><div class="badge">Comfort 320</div><div class="badge">Income 120/day</div></div><button class="btn primary" onclick="upgradeApartment()">Upgrade room • 300 🪙</button></div></div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+function switchScreen(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.navbtn[data-screen]').forEach(x=>x.classList.toggle('active',x.dataset.screen===id));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.navbtn[data-screen]').forEach(b=>b.addEventListener('click',()=>switchScreen(b.dataset.screen)));
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function simulateSync(){document.getElementById('steps').textContent='9,137';document.getElementById('coins').textContent='1,315';toast('Apple Health synced • +75 coins earned ✨')}
+function feedPet(){document.getElementById('hunger').style.width='92%';document.getElementById('hungerText').textContent='92%';toast('Google enjoyed the snack 🦴')}
+function playPet(){document.getElementById('happy').style.width='100%';document.getElementById('happyText').textContent='100%';toast('Google is super happy! 🎾')}
+function upgradeApartment(){let c=document.getElementById('coins');let n=parseInt(c.textContent.replace(',',''));if(n>=300){n-=300;c.textContent=n.toLocaleString();toast('Apartment upgraded! New furniture unlocked 🛋️')}else toast('Not enough coins yet — go move! 🏃')}
+</script>
+</body>
+</html>
